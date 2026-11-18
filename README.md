@@ -10,19 +10,19 @@ Open-source Android app for Philips Hue, aimed at power users. Local only (Wi-Fi
 - MotionAware (`motion_area_configuration`) on custom zones, e.g. toilet + hallway
 - Better entertainment area editor (`entertainment_configuration`)
 
-## Planned stack
-Kotlin, Jetpack Compose (Material 3), OkHttp + kotlinx.serialization, SSE eventstream, Hilt, Room.
+## Status
+Early MVP: pairing, lights/rooms, scenes, zone editor (cross-room), automations on/off, MotionAware list and toggle.
 
-## Bridge configuration
-Bridge address and application key are configured locally (never committed):
-`lampje.properties`
+## Structure
+- `core/`: pure Kotlin/JVM Hue CLIP v2 client, state cache with live event stream (SSE), unit tests
+- `app/`: Android app (Kotlin, Jetpack Compose, Material 3)
 
-```
-HUE_BRIDGE_IP=192.168.x.x
-HUE_APP_KEY=...
-```
+## Build
+- Tests: `./gradlew :core:test` (JDK 17)
+- APK: `./gradlew :app:assembleDebug` (needs the Android SDK, `ANDROID_HOME`). GitHub Actions builds it on every push; download `lampje-debug-apk` from the workflow run artifacts.
 
-If no IP is set, discovery via mDNS (`_hue._tcp`) is used.
+## Pairing
+In the app enter the bridge IP, press the link button on the bridge and tap Pair. The application key and the bridge's certificate fingerprint (trust on first use) are stored in app-private storage.
 
 See [docs/api-notes.md](docs/api-notes.md).
 
