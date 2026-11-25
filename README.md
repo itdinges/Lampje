@@ -11,7 +11,7 @@ Open-source Android app for Philips Hue, aimed at power users. Local only (Wi-Fi
 - Better entertainment area editor (`entertainment_configuration`)
 
 ## Status
-Early MVP: pairing, lights/rooms, scenes, zone editor (cross-room), automations on/off, MotionAware list and toggle.
+Early MVP: pairing, lights/rooms, scenes, zone editor (cross-room), automations on/off and manual start, MotionAware list and toggle. Manual start uses the Hue behavior trigger API; support depends on the bridge's behavior script.
 
 ## Structure
 - `core/`: pure Kotlin/JVM Hue CLIP v2 client, state cache with live event stream (SSE), unit tests

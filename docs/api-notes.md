@@ -20,3 +20,4 @@ Realtime: `GET /eventstream/clip/v2` (SSE).
 - Lamp limits per MotionAware area
 - Writable fields per `behavior_script` (schemas differ per script)
 - Entertainment channel limits for gradient lights
+- Manual `behavior_instance` start is a `PUT` with `{"trigger":{"start":{}}}`. Support is script-specific; verify on the real bridge.

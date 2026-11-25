@@ -92,6 +92,18 @@ class HueStoreTest {
     }
 
     @Test
+    fun startAutomationSendsStartTriggerWithoutChangingEnabledState() = runTest {
+        val store = store()
+        store.refresh()
+        store.startAutomation("automation-1")
+
+        val put = bodies.last()
+        assertEquals("PUT", put.method)
+        assertEquals("/clip/v2/resource/behavior_instance/automation-1", put.path)
+        assertEquals("""{"trigger":{"start":{}}}""", put.body.readUtf8())
+    }
+
+    @Test
     fun zoneCanSpanLightsFromDifferentRooms() = runTest {
         val store = store()
         store.refresh()

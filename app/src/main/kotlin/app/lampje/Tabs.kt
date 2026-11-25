@@ -17,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
@@ -260,10 +261,15 @@ fun AutomationsTab(snapshot: HueSnapshot, vm: MainViewModel) {
                 headlineContent = { Text(automation.displayName()) },
                 supportingContent = { Text(automation.status ?: "unknown") },
                 trailingContent = {
-                    Switch(
-                        checked = automation.enabled,
-                        onCheckedChange = { on -> vm.act { setAutomationEnabled(automation.id, on) } },
-                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        IconButton(onClick = { vm.act { startAutomation(automation.id) } }) {
+                            Icon(Icons.Default.PlayArrow, contentDescription = "Run ${automation.displayName()} now")
+                        }
+                        Switch(
+                            checked = automation.enabled,
+                            onCheckedChange = { on -> vm.act { setAutomationEnabled(automation.id, on) } },
+                        )
+                    }
                 },
             )
         }

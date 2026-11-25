@@ -116,6 +116,14 @@ class HueStore(private val api: HueApi) {
     suspend fun setAutomationEnabled(id: String, enabled: Boolean) =
         write("behavior_instance", id, buildJsonObject { put("enabled", enabled) })
 
+    suspend fun startAutomation(id: String) {
+        api.update("behavior_instance", id, buildJsonObject {
+            put("trigger", buildJsonObject {
+                put("start", buildJsonObject {})
+            })
+        })
+    }
+
     suspend fun setMotionAreaEnabled(id: String, enabled: Boolean) =
         write("motion_area_configuration", id, buildJsonObject { put("enabled", enabled) })
 
